@@ -34,4 +34,4 @@
 ＊<b>모듈 별 역할:</b><br>
    &nbsp;&nbsp;&nbsp;♣kic_crawler - 각종 모듈의 도움을 받아 학과 누리집의 네 개 공지 게시판(Undergraduate, Jobs & Activities, Scholarships, Others)을 크롤링한 뒤 수집한 내용을 텔레그램 봇을 통해 각 채널에 전파.<br>
    &nbsp;&nbsp;&nbsp;♣dbman - sqlite3을 이용한 최신 공지 사항의 관리.<br>
-   &nbsp;&nbsp;&nbsp;♣bitly - URL 단축 서비스인 'Bitly'(bitly.com)의 API를 통한 수집한 공지 사항의 URL 단축.<br>
+   &nbsp;&nbsp;&nbsp;♣bitly - URL 단축 서비스인 'Bitly'(bitly.com)의 API를 통해 수집한 공지 사항의 URL 단축.<br>
