@@ -3,7 +3,7 @@
 import sqlite3
 
 class DBMan:
-#Telegram 및 Crawler 테이블 공통
+#Crawler 테이블 최초 작성
 
 	def __init__(self, dbname = r"/PATH/TO/DATABASE/kic.db"):
 		self.dbname = dbname
@@ -28,7 +28,7 @@ class DBMan:
 		self.conn.execute(stmt7)
 		self.conn.commit()
 
-#Crawler 테이블용
+#Crawler 테이블용 함수 정의
 
 	def add_notice(self, category, notice_date, crawl_dt, notice_title, url, msg_id):
 		stmt = f"INSERT OR IGNORE INTO {category} VALUES (?, ?, ?, ?, ?)"
