@@ -41,6 +41,9 @@ def get_pinned(soup):
             new_icon.decompose()
         title = notice.find('div', {'class':'kboard-default-cut-strings'}).get_text().strip()
         date = notice.find('td', {'class':'kboard-list-date'}).get_text().strip()
+        if ((len(date) == 5) or (len(date) < 5)):
+            date = datetime.date.today()
+            date = date.strftime("%Y.%m.%d")
         links = notice.find_all('a')
         for a in links:
             if a.has_attr('href'):
@@ -60,6 +63,9 @@ def get_normal(soup):
         try:
             title = notice.find('div', {'class':'kboard-default-cut-strings'}).get_text().strip()
             date = notice.find('td', {'class':'kboard-list-date'}).get_text().strip()
+            if ((len(date) == 5) or (len(date) < 5)):
+                date = datetime.date.today()
+                date = date.strftime("%Y.%m.%d")
             links = notice.find_all('a')
             for a in links:
                 if a.has_attr('href'):
@@ -69,7 +75,7 @@ def get_normal(soup):
         except:
             pass
     return new_normal
-    
+
 def url_mod(short_link):
     '''
     This function modifies the given short URL to match/become the full URL.
@@ -175,7 +181,7 @@ for category in [undergraduate, jna, scholarships, others]:
                 notice_date = new_pinned[short_link]['notice_date']
                 crawl_dt = datetime.datetime.now()
                 title = new_pinned[short_link]['notice_title']
-                
+
                 text_part = notice_date + '\n' + title
                 full_url = shorten_url(url_mod(short_link))
                 final_notice = '#중요_공지\n' + f'<code>{text_part}</code>' + '\n' + full_url
@@ -207,7 +213,7 @@ for category in [undergraduate, jna, scholarships, others]:
                 notice_date = new_normal[short_link]['notice_date']
                 crawl_dt = datetime.datetime.now()
                 title = new_normal[short_link]['notice_title']
-                
+
                 text_part = notice_date + '\n' + title
                 full_url = shorten_url(url_mod(short_link))
                 final_notice = f'<code>{text_part}</code>' + '\n' + full_url
@@ -233,4 +239,8 @@ for category in [undergraduate, jna, scholarships, others]:
         try:
             response.raise_for_status()
         except r.exceptions.HTTPError as e:
-            msg_admin(f'CRAWLING FAILED!\n{e}')
+            if response.status_code == 502:
+                pass
+            else:
+                msg_admin(f'CRAWLING FAILED!\n{e}')
+            time.sleep(300)
