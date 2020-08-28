@@ -243,4 +243,4 @@ for category in [undergraduate, jna, scholarships, others]:
                 pass
             else:
                 msg_admin(f'CRAWLING FAILED!\n{e}')
-            time.sleep(300)
+            time.sleep(900)
